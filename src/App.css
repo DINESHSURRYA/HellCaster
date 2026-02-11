@@ -1,0 +1,157 @@
+/* App-specific styles */
+
+/* Ensure smooth transitions for theme changes */
+* {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+/* Disable transitions for transform and opacity to avoid conflicts with animations */
+* {
+  transition-property: background-color, border-color, color, box-shadow;
+}
+
+/* Grid cell specific transitions */
+.grid-cell {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Button hover effects */
+.btn-primary,
+.btn-secondary {
+  transition: all 0.4s ease;
+}
+
+/* Card hover effects */
+.data-card {
+  transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Navigation link underline animation */
+.nav-links a::after {
+  transition: width 0.3s ease;
+}
+
+/* Boot sequence animations */
+@keyframes type-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes boot-load {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Chromatic drift animation */
+@keyframes chromatic-drift {
+  0%, 100% {
+    text-shadow: -2px 0 var(--neon-secondary), 2px 0 var(--neon-primary);
+  }
+  50% {
+    text-shadow: 2px 0 var(--neon-secondary), -2px 0 var(--neon-primary);
+  }
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Pulse glow animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--neon-primary), 0 0 40px hsl(var(--primary) / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--neon-primary), 0 0 80px hsl(var(--primary) / 0.5);
+  }
+}
+
+/* Scanline animation */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    letter-spacing: 5px !important;
+  }
+  
+  .interactive-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .interactive-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .cta-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--neon-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
