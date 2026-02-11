@@ -75,9 +75,8 @@ We recommend using the `gh-pages` package which has been already set up in this 
     git commit -m "Initial commit for GH Pages"
     ```
 3.  **Add your remote repository**:
-    Replace `your-username` and `your-repo-name` with your actual GitHub details.
     ```bash
-    git remote add origin https://github.com/your-username/your-repo-name.git
+    git remote add origin https://github.com/DINESHSURRYA/HellCaster.git
     ```
 4.  **Deploy**:
     Run the following command to build the project and push the `dist` folder to the `gh-pages` branch:

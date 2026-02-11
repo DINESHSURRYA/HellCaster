@@ -1,32 +1,34 @@
 import { useCallback, useRef, useEffect } from 'react';
 
-export type SoundType = 
-  | 'boot' 
-  | 'hover' 
-  | 'click' 
-  | 'warp' 
-  | 'storm' 
-  | 'crystal' 
-  | 'matrix' 
-  | 'slate' 
-  | 'nebula' 
-  | 'topo' 
-  | 'spectral' 
+export type SoundType =
+  | 'boot'
+  | 'hover'
+  | 'click'
+  | 'warp'
+  | 'storm'
+  | 'crystal'
+  | 'matrix'
+  | 'slate'
+  | 'nebula'
+  | 'topo'
+  | 'spectral'
   | 'reactor';
 
+const BASE_URL = import.meta.env.BASE_URL === '/' ? './' : import.meta.env.BASE_URL;
+
 const soundUrls: Record<SoundType, string> = {
-  boot: '/sounds/boot.mp3',
-  hover: '/sounds/hover.mp3',
-  click: '/sounds/click.mp3',
-  warp: '/sounds/warp.mp3',
-  storm: '/sounds/storm.mp3',
-  crystal: '/sounds/crystal.mp3',
-  matrix: '/sounds/matrix.mp3',
-  slate: '/sounds/slate.mp3',
-  nebula: '/sounds/nebula.mp3',
-  topo: '/sounds/topo.mp3',
-  spectral: '/sounds/spectral.mp3',
-  reactor: '/sounds/reactor.mp3',
+  boot: `${BASE_URL}/sounds/boot.mp3`.replace(/\/+/g, '/'),
+  hover: `${BASE_URL}/sounds/hover.mp3`.replace(/\/+/g, '/'),
+  click: `${BASE_URL}/sounds/click.mp3`.replace(/\/+/g, '/'),
+  warp: `${BASE_URL}/sounds/warp.mp3`.replace(/\/+/g, '/'),
+  storm: `${BASE_URL}/sounds/storm.mp3`.replace(/\/+/g, '/'),
+  crystal: `${BASE_URL}/sounds/crystal.mp3`.replace(/\/+/g, '/'),
+  matrix: `${BASE_URL}/sounds/matrix.mp3`.replace(/\/+/g, '/'),
+  slate: `${BASE_URL}/sounds/slate.mp3`.replace(/\/+/g, '/'),
+  nebula: `${BASE_URL}/sounds/nebula.mp3`.replace(/\/+/g, '/'),
+  topo: `${BASE_URL}/sounds/topo.mp3`.replace(/\/+/g, '/'),
+  spectral: `${BASE_URL}/sounds/spectral.mp3`.replace(/\/+/g, '/'),
+  reactor: `${BASE_URL}/sounds/reactor.mp3`.replace(/\/+/g, '/'),
 };
 
 export function useSound() {
@@ -53,6 +55,9 @@ export function useSound() {
       const audio = new Audio(soundUrls[type]);
       audio.preload = 'auto';
       audio.volume = 0.5;
+      audio.addEventListener('error', (e) => {
+        console.error(`Error loading sound: ${type} at ${soundUrls[type]}`, e);
+      });
       audioRefs.current[type] = audio;
     });
 
@@ -69,7 +74,7 @@ export function useSound() {
 
   const play = useCallback((type: SoundType, volume: number = 0.5) => {
     if (isMuted.current) return;
-    
+
     const audio = audioRefs.current[type];
     if (audio) {
       audio.currentTime = 0;

@@ -10,7 +10,7 @@ description: Deploy the application to GitHub Pages
 
 2. (First time only) Add your remote repository:
    ```bash
-   git remote add origin https://github.com/DINESHSURRYA/<your-repo-name>.git
+   git remote add origin https://github.com/DINESHSURRYA/HellCaster.git
    ```
 
 // turbo
